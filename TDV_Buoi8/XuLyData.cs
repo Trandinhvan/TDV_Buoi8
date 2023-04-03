@@ -11,6 +11,7 @@ namespace TDV_Buoi8
   public  class XuLyData
     {
        DataClasses1DataContext data = new DataClasses1DataContext();
+        //abc
        public void LoadMonHoc(DataGridView dtg)
        {
         var monhocs = from mh in data.MonHocs select mh;
