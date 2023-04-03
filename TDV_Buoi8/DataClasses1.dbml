@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLSINHVIEN" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=A102PC37;Initial Catalog=QLSINHVIEN;User ID=sa" SettingsObjectName="TDV_Buoi8.Properties.Settings" SettingsPropertyName="QLSINHVIENConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Diem" Member="Diems">
+    <Type Name="Diem">
+      <Column Name="MaSinhVien" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaMonHoc" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Diem" Member="Diem1" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="SinhVien_Diem" Member="SinhVien" ThisKey="MaSinhVien" OtherKey="MaSinhVien" Type="SinhVien" IsForeignKey="true" />
+      <Association Name="MonHoc_Diem" Member="MonHoc" ThisKey="MaMonHoc" OtherKey="MaMonHoc" Type="MonHoc" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SinhVien" Member="SinhViens">
+    <Type Name="SinhVien">
+      <Column Name="MaSinhVien" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MaLop" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="SinhVien_Diem" Member="Diems" ThisKey="MaSinhVien" OtherKey="MaSinhVien" Type="Diem" />
+      <Association Name="Lop_SinhVien" Member="Lop" ThisKey="MaLop" OtherKey="MaLop" Type="Lop" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MonHoc" Member="MonHocs">
+    <Type Name="MonHoc">
+      <Column Name="MaMonHoc" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenMonHoc" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="MonHoc_Diem" Member="Diems" ThisKey="MaMonHoc" OtherKey="MaMonHoc" Type="Diem" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Lop" Member="Lops">
+    <Type Name="Lop">
+      <Column Name="MaLop" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenLop" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MaKhoa" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Lop_SinhVien" Member="SinhViens" ThisKey="MaLop" OtherKey="MaLop" Type="SinhVien" />
+      <Association Name="Khoa_Lop" Member="Khoa" ThisKey="MaKhoa" OtherKey="MaKhoa" Type="Khoa" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Khoa" Member="Khoas">
+    <Type Name="Khoa">
+      <Column Name="MaKhoa" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenKhoa" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="Khoa_Lop" Member="Lops" ThisKey="MaKhoa" OtherKey="MaKhoa" Type="Lop" />
+    </Type>
+  </Table>
+</Database>
